@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia Invictus — Boqueirão, Curitiba</title>
+  <meta name="description" content="Academia Invictus no Boqueirão, Curitiba. Musculação, Funcional, Cardio. Planos a partir de R$64,90/mês. Aula experimental gratuita. Nota 4,8 no Google.">
+  <meta property="og:title" content="Academia Invictus — Boqueirão, Curitiba">
+  <meta property="og:description" content="Supere seus limites na Academia Invictus. Planos a partir de R$64,90/mês. Aula experimental gratuita!">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #060608;
+      --dark: #0d0d14;
+      --dark2: #12121c;
+      --dark3: #1a1a28;
+      --blue-dark: #1a1f3c;
+      --accent: #6b7fff;
+      --accent2: #8b9fff;
+      --accent-glow: rgba(107, 127, 255, 0.35);
+      --white: #ffffff;
+      --gray: #a0a0b8;
+      --gray-light: #d0d0e0;
+      --font-title: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(6, 6, 8, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-text {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      transition: background 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent2) !important; box-shadow: 0 0 20px var(--accent-glow); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.18) saturate(0.6);
+      transform: scale(1.05);
+      transition: transform 0.1s linear;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(6,6,8,0.5) 0%, rgba(6,6,8,0.2) 40%, rgba(6,6,8,0.85) 100%);
+    }
+    #particles-canvas { position: absolute; inset: 0; pointer-events: none; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(107,127,255,0.15);
+      border: 1px solid rgba(107,127,255,0.4);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 30px;
+      margin-bottom: 28px;
+    }
+    .hero-badge i { font-size: 0.7rem; }
+    .hero-logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-lightning {
+      width: clamp(40px, 7vw, 80px);
+      filter: drop-shadow(0 0 18px rgba(107,127,255,0.9));
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { filter: drop-shadow(0 0 18px rgba(107,127,255,0.9)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 30px rgba(139,159,255,1)); transform: scale(1.06); }
+    }
+    .hero-tagline {
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      color: var(--gray);
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 36px;
+      color: #f5c518;
+      font-size: 0.9rem;
+    }
+    .hero-stars span { color: var(--gray-light); font-size: 0.82rem; margin-left: 6px; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 15px 34px;
+      border-radius: 8px;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(107,127,255,0.4);
+    }
+    .btn-primary:hover { background: var(--accent2); box-shadow: 0 6px 30px rgba(107,127,255,0.6); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .hero-scroll i { animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 90px 5%; }
+    .section-label {
+      font-family: var(--font-title);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .section-title span { color: var(--accent); }
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 560px;
+      font-weight: 300;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* divider */
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 16px 0 20px;
+    }
+    .center .divider { margin: 16px auto 20px; }
+
+    /* ── MODALIDADES ── */
+    #modalidades { background: var(--dark); }
+    .modalities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+    }
+    .modality-card {
+      background: var(--dark2);
+      border: 1px solid rgba(107,127,255,0.12);
+      border-radius: 14px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .modality-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .modality-card:hover { border-color: rgba(107,127,255,0.35); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .modality-card:hover::before { opacity: 1; }
+    .modality-icon {
+      width: 64px; height: 64px;
+      background: rgba(107,127,255,0.12);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.6rem;
+      color: var(--accent);
+      transition: background 0.3s;
+    }
+    .modality-card:hover .modality-icon { background: rgba(107,127,255,0.22); }
+    .modality-card h3 {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .modality-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── PLANOS ── */
+    #planos { background: var(--black); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    .plan-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 36px 28px 32px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .plan-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(107,127,255,0.2);
+      background: linear-gradient(145deg, #14142b, var(--dark2));
+    }
+    .plan-badge {
+      position: absolute;
+      top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-title);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .plan-price .currency { font-size: 1rem; font-weight: 600; color: var(--gray-light); margin-top: 8px; }
+    .plan-price .amount {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 3rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .plan-price .period { color: var(--gray); font-size: 0.85rem; }
+    .plan-savings {
+      display: inline-block;
+      background: rgba(107,127,255,0.15);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .plan-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 20px 0; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray-light);
+      font-size: 0.88rem;
+    }
+    .plan-features li i { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; }
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 8px;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+      width: 100%;
+    }
+    .plan-btn-outline {
+      background: transparent;
+      border: 2px solid rgba(107,127,255,0.4);
+      color: var(--accent);
+    }
+    .plan-btn-outline:hover { background: rgba(107,127,255,0.1); border-color: var(--accent); }
+    .plan-btn-filled {
+      background: var(--accent);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(107,127,255,0.4);
+    }
+    .plan-btn-filled:hover { background: var(--accent2); box-shadow: 0 6px 30px rgba(107,127,255,0.6); transform: translateY(-1px); }
+
+    /* ── AULA EXPERIMENTAL ── */
+    #experimental {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--blue-dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #experimental::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(107,127,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .experimental-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .experimental-text .section-sub { max-width: none; }
+    .experimental-perks { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .experimental-perks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gray-light);
+      font-size: 0.95rem;
+    }
+    .experimental-perks li i { color: var(--accent); font-size: 1rem; }
+    .experimental-cta {
+      background: var(--dark2);
+      border: 1px solid rgba(107,127,255,0.2);
+      border-radius: 16px;
+      padding: 40px 36px;
+    }
+    .experimental-cta h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .experimental-cta p { color: var(--gray); font-size: 0.9rem; margin-bottom: 24px; }
+
+    /* ── PROVA SOCIAL ── */
+    #reviews { background: var(--dark); }
+    .rating-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+      padding: 36px;
+      background: var(--dark2);
+      border-radius: 16px;
+      border: 1px solid rgba(107,127,255,0.12);
+    }
+    .rating-score {
+      font-family: var(--font-title);
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+    }
+    .rating-info { display: flex; flex-direction: column; gap: 8px; }
+    .rating-stars { color: #f5c518; font-size: 1.4rem; display: flex; gap: 4px; }
+    .rating-count { color: var(--gray); font-size: 0.9rem; }
+    .rating-google {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray-light);
+      font-size: 0.9rem;
+    }
+    .rating-google i { font-size: 1.6rem; color: #4285f4; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.3s;
+    }
+    .review-card:hover { border-color: rgba(107,127,255,0.25); }
+    .review-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .review-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #3a4fc7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 600; font-size: 0.92rem; }
+    .review-date { color: var(--gray); font-size: 0.78rem; margin-top: 2px; }
+    .review-stars { color: #f5c518; font-size: 0.8rem; display: flex; gap: 2px; margin-bottom: 10px; }
+    .review-text { color: var(--gray-light); font-size: 0.88rem; line-height: 1.65; }
+
+    /* ── ESTRUTURA ── */
+    #estrutura { background: var(--black); }
+    .structure-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .structure-item {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+    }
+    .structure-item:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/7;
+    }
+    .structure-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75) saturate(0.8);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .structure-item:hover img { filter: brightness(0.9) saturate(1); transform: scale(1.04); }
+    .structure-item-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 16px 18px 14px;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+
+    /* ── HORÁRIOS + PAGAMENTOS ── */
+    #info { background: var(--dark); }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .hours-table td { padding: 14px 0; color: var(--gray-light); font-size: 0.92rem; }
+    .hours-table td:last-child { text-align: right; color: var(--accent2); font-weight: 600; }
+    /* ── SCHEDULE TABLE ── */
+    .schedule-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .schedule-table th {
+      background: rgba(107,127,255,0.12);
+      color: var(--accent);
+      font-family: var(--font-title);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: center;
+      border: 1px solid rgba(107,127,255,0.18);
+    }
+    .schedule-table th:first-child { text-align: left; }
+    .schedule-table td {
+      padding: 11px 14px;
+      border: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.88rem;
+      color: var(--gray-light);
+      text-align: center;
+    }
+    .schedule-table td:first-child { text-align: left; font-weight: 600; color: var(--white); }
+    .schedule-table tbody tr:hover { background: rgba(107,127,255,0.06); }
+    .schedule-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-family: var(--font-title);
+    }
+    .schedule-tag.funcional { background: rgba(107,127,255,0.18); color: var(--accent2); border: 1px solid rgba(107,127,255,0.3); }
+    .schedule-tag.fitdance { background: rgba(199,107,255,0.15); color: #c87bff; border: 1px solid rgba(199,107,255,0.3); }
+
+    .payment-methods { display: flex; flex-direction: column; gap: 14px; }
+    .payment-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .payment-icon {
+      width: 44px; height: 44px;
+      background: rgba(107,127,255,0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .payment-item span { font-weight: 500; font-size: 0.95rem; }
+
+    /* ── FORMULÁRIO ── */
+    #formulario { background: var(--black); }
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .form-info { }
+    .form-info p { color: var(--gray); font-size: 0.95rem; line-height: 1.7; margin-bottom: 28px; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--gray-light);
+      font-size: 0.92rem;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link i { width: 20px; text-align: center; color: var(--accent); }
+    .form-card {
+      background: var(--dark2);
+      border: 1px solid rgba(107,127,255,0.15);
+      border-radius: 16px;
+      padding: 40px 36px;
+    }
+    .form-card h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+    .form-card p { color: var(--gray); font-size: 0.88rem; margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--gray-light);
+      margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(107,127,255,0.15);
+    }
+    .form-group select option { background: var(--dark2); }
+    .form-group .select-wrapper { position: relative; }
+    .form-group .select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--gray);
+      pointer-events: none;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%;
+      background: var(--accent);
+      color: var(--white);
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(107,127,255,0.35);
+      margin-top: 6px;
+    }
+    .form-submit:hover { background: var(--accent2); box-shadow: 0 6px 30px rgba(107,127,255,0.5); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .form-message {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-message.success { background: rgba(72, 199, 142, 0.15); border: 1px solid rgba(72,199,142,0.4); color: #48c78e; }
+    .form-message.error { background: rgba(255, 94, 94, 0.12); border: 1px solid rgba(255,94,94,0.35); color: #ff5e5e; }
+
+    /* ── LOCALIZAÇÃO ── */
+    #localizacao { background: var(--dark); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .location-info { display: flex; flex-direction: column; gap: 20px; }
+    .location-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .location-item i { color: var(--accent); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .location-item strong { display: block; font-size: 0.85rem; font-weight: 600; color: var(--gray); letter-spacing: 0.5px; margin-bottom: 4px; text-transform: uppercase; }
+    .location-item span { color: var(--gray-light); font-size: 0.92rem; line-height: 1.55; }
+    .map-container {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(107,127,255,0.15);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .map-container iframe { display: block; width: 100%; height: 380px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #040406;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 48px 5% 28px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-brand {}
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-logo-text {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+    .footer-brand p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; max-width: 300px; margin-bottom: 20px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 38px; height: 38px;
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .social-link:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .footer-col h4 {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--accent); }
+    .footer-col ul li { color: var(--gray); font-size: 0.88rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { color: var(--gray); font-size: 0.8rem; }
+
+    /* ── FLOATING WHATSAPP ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .whatsapp-tooltip {
+      background: var(--dark2);
+      border: 1px solid rgba(107,127,255,0.2);
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; transform: translateX(0); }
+    .whatsapp-btn {
+      width: 58px; height: 58px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: all 0.3s;
+      position: relative;
+    }
+    .whatsapp-btn::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.15);
+      animation: wa-pulse 2.5s ease-out infinite;
+    }
+    @keyframes wa-pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .whatsapp-btn:hover { background: #1da851; transform: scale(1.08); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 64px 5%; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(6,6,8,0.98); padding: 20px 5%; gap: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .experimental-inner { grid-template-columns: 1fr; gap: 36px; }
+      .avaliacao-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .info-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-wrapper { grid-template-columns: 1fr; gap: 40px; }
+      .location-grid { grid-template-columns: 1fr; }
+      .structure-grid { grid-template-columns: 1fr 1fr; }
+      .structure-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-brand { grid-column: auto; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .plans-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .plans-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+      .structure-grid { grid-template-columns: 1fr; }
+      .structure-item:first-child { grid-column: auto; aspect-ratio: 4/3; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .hero-btns a, .hero-btns button { width: 100%; max-width: 300px; }
+      .form-card { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <svg viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 1L4 20H14L10 35L26 14H16L18 1Z" fill="#6b7fff" stroke="#8b9fff" stroke-width="0.5"/>
+      </svg>
+      <span class="nav-logo-text">Invictus</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#modalidades">Modalidades</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#reviews">Avaliações</a></li>
+      <li><a href="#info">Horários</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+      <li><a href="#formulario" class="nav-cta">Matricule-se</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-star"></i>
+        Nota 4,8 no Google — 149 avaliações
+      </div>
+      <div class="hero-logo-wrapper">
+        <h1 class="hero-title">INVICTU</h1>
+        <svg class="hero-lightning" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M42 2L8 46H30L18 78L56 30H34L42 2Z" fill="#6b7fff"/>
+          <path d="M42 2L8 46H30L18 78L56 30H34L42 2Z" fill="url(#lg)" opacity="0.6"/>
+          <defs>
+            <linearGradient id="lg" x1="8" y1="2" x2="56" y2="78" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#a0b4ff"/>
+              <stop offset="100%" stop-color="#4455cc"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <p class="hero-tagline">Supere seus limites</p>
+      <p class="hero-sub">A academia que transforma rotinas em resultados. Treine com estrutura completa no coração do Boqueirão.</p>
+      <div class="hero-btns">
+        <a href="#formulario" class="btn-primary">
+          <i class="fa-solid fa-bolt" style="margin-right:8px;"></i>Matricule-se Agora
+        </a>
+        <a href="#formulario" class="btn-outline">Aula Experimental Grátis</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ── MODALIDADES ── -->
+  <section id="modalidades">
+    <div class="section-header center reveal">
+      <p class="section-label">O que oferecemos</p>
+      <h2 class="section-title">Nossas <span>Modalidades</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Treinos para todos os objetivos, com equipamentos modernos e profissionais qualificados.</p>
+    </div>
+    <div class="modalities-grid">
+      <div class="modality-card reveal">
+        <div class="modality-icon">
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+        <h3>Musculação</h3>
+        <p>Equipamentos de última geração para ganho de massa, força e definição muscular. Área ampla e bem distribuída.</p>
+      </div>
+      <div class="modality-card reveal" style="transition-delay:0.1s">
+        <div class="modality-icon">
+          <i class="fa-solid fa-person-running"></i>
+        </div>
+        <h3>Funcional</h3>
+        <p>Treinamento funcional para melhorar mobilidade, coordenação e resistência com movimentos do dia a dia.</p>
+      </div>
+      <div class="modality-card reveal" style="transition-delay:0.2s">
+        <div class="modality-icon">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <h3>Cardio</h3>
+        <p>Esteiras, bicicletas ergométricas e elípticos para queima de gordura e saúde cardiovascular.</p>
+      </div>
+      <div class="modality-card reveal" style="transition-delay:0.3s">
+        <div class="modality-icon">
+          <i class="fa-solid fa-spa"></i>
+        </div>
+        <h3>Alongamento e Flexibilidade</h3>
+        <p>Área dedicada ao alongamento e mobilidade, essencial para recuperação muscular e prevenção de lesões.</p>
+      </div>
+      <div class="modality-card reveal" style="transition-delay:0.4s">
+        <div class="modality-icon">
+          <i class="fa-solid fa-music"></i>
+        </div>
+        <h3>FitDance</h3>
+        <p>Aulas de dança fitness para queimar calorias com muita energia e diversão. Seg e Qua: 18:30–19:30.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PLANOS ── -->
+  <section id="planos" style="background: var(--black);">
+    <div class="section-header center reveal">
+      <p class="section-label">Invista em você</p>
+      <h2 class="section-title">Escolha seu <span>Plano</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Planos flexíveis para se adequar à sua rotina e bolso. Sem taxa de matrícula.</p>
+    </div>
+    <div class="plans-grid">
+      <!-- Mensal -->
+      <div class="plan-card reveal">
+        <p class="plan-name">Mensal</p>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">99</span>
+          <span class="period">,90/mês</span>
+        </div>
+        <span class="plan-savings">Pagamento mensal</span>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check"></i>Acesso completo à academia</li>
+          <li><i class="fa-solid fa-check"></i>Musculação e Cardio</li>
+          <li><i class="fa-solid fa-check"></i>Área de Funcional</li>
+          <li><i class="fa-solid fa-check"></i>Avaliação física</li>
+          <li><i class="fa-solid fa-check"></i>App de treinos</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="selectPlan('Mensal - R$99,90')">Escolher Plano</button>
+      </div>
+      <!-- Trimestral -->
+      <div class="plan-card reveal" style="transition-delay:0.1s">
+        <p class="plan-name">Trimestral</p>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">84</span>
+          <span class="period">,90/mês</span>
+        </div>
+        <span class="plan-savings">Economia de R$45,00 vs mensal</span>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check"></i>Acesso completo à academia</li>
+          <li><i class="fa-solid fa-check"></i>Musculação e Cardio</li>
+          <li><i class="fa-solid fa-check"></i>Área de Funcional</li>
+          <li><i class="fa-solid fa-check"></i>Avaliação física</li>
+          <li><i class="fa-solid fa-check"></i>App de treinos</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="selectPlan('Trimestral - R$84,90/mês')">Escolher Plano</button>
+      </div>
+      <!-- Semestral -->
+      <div class="plan-card reveal" style="transition-delay:0.2s">
+        <p class="plan-name">Semestral</p>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">74</span>
+          <span class="period">,90/mês</span>
+        </div>
+        <span class="plan-savings">Economia de R$150,00 vs mensal</span>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check"></i>Acesso completo à academia</li>
+          <li><i class="fa-solid fa-check"></i>Musculação e Cardio</li>
+          <li><i class="fa-solid fa-check"></i>Área de Funcional</li>
+          <li><i class="fa-solid fa-check"></i>Avaliação física</li>
+          <li><i class="fa-solid fa-check"></i>App de treinos</li>
+        </ul>
+        <button class="plan-btn plan-btn-outline" onclick="selectPlan('Semestral - R$74,90/mês')">Escolher Plano</button>
+      </div>
+      <!-- Anual (Featured) -->
+      <div class="plan-card featured reveal" style="transition-delay:0.3s">
+        <span class="plan-badge">Melhor custo-benefício</span>
+        <p class="plan-name">Anual</p>
+        <div class="plan-price">
+          <span class="currency">R$</span>
+          <span class="amount">64</span>
+          <span class="period">,90/mês</span>
+        </div>
+        <span class="plan-savings">Economia de R$420,00 vs mensal</span>
+        <hr class="plan-divider">
+        <ul class="plan-features">
+          <li><i class="fa-solid fa-check"></i>Acesso completo à academia</li>
+          <li><i class="fa-solid fa-check"></i>Musculação e Cardio</li>
+          <li><i class="fa-solid fa-check"></i>Área de Funcional</li>
+          <li><i class="fa-solid fa-check"></i>Avaliação física</li>
+          <li><i class="fa-solid fa-check"></i>App de treinos</li>
+        </ul>
+        <button class="plan-btn plan-btn-filled" onclick="selectPlan('Anual - R$64,90/mês')">Escolher Plano</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AULA EXPERIMENTAL ── -->
+  <section id="experimental">
+    <div class="experimental-inner">
+      <div class="experimental-text reveal-left">
+        <p class="section-label">Sem compromisso</p>
+        <h2 class="section-title">Aula<br><span>Experimental Grátis</span></h2>
+        <div class="divider"></div>
+        <p class="section-sub">Venha conhecer a Academia Invictus sem pagar nada. Treine um dia, conheça a estrutura e a equipe, e depois decida.</p>
+        <ul class="experimental-perks">
+          <li><i class="fa-solid fa-circle-check"></i>Acesso completo às instalações</li>
+          <li><i class="fa-solid fa-circle-check"></i>Orientação com profissional de educação física</li>
+          <li><i class="fa-solid fa-circle-check"></i>Sem compromisso de matrícula</li>
+          <li><i class="fa-solid fa-circle-check"></i>Agende pelo WhatsApp ou formulário</li>
+        </ul>
+      </div>
+      <div class="experimental-cta reveal-right">
+        <h3>Agende sua aula gratuita</h3>
+        <p>Preencha o formulário e nossa equipe entrará em contato via WhatsApp para confirmar seu horário.</p>
+        <a href="#formulario" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;">
+          <i class="fa-solid fa-calendar-check"></i>
+          Agendar Aula Experimental
+        </a>
+        <div style="margin-top:20px;display:flex;align-items:center;gap:10px;color:var(--gray);font-size:0.85rem;">
+          <i class="fa-brands fa-whatsapp" style="color:#25d366;font-size:1.1rem;"></i>
+          Ou entre em contato direto: (41) 99588-2593
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AVALIAÇÃO FÍSICA ── -->
+  <section id="avaliacao" style="background: var(--black); padding: 90px 5%;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="avaliacao-grid">
+        <div class="reveal-left">
+          <p class="section-label">Conheça seu corpo</p>
+          <h2 class="section-title">Avaliação Física<br><span>Completa</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--gray);font-size:0.95rem;line-height:1.7;margin-bottom:28px;">Saiba exatamente onde você está e trace o melhor caminho para seus objetivos. Nossa avaliação física é conduzida por profissional de educação física qualificado.</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
+            <li style="display:flex;align-items:center;gap:12px;color:var(--gray-light);font-size:0.95rem;">
+              <i class="fa-solid fa-ruler" style="color:var(--accent);width:18px;text-align:center;"></i>Medidas corporais completas
+            </li>
+            <li style="display:flex;align-items:center;gap:12px;color:var(--gray-light);font-size:0.95rem;">
+              <i class="fa-solid fa-weight-scale" style="color:var(--accent);width:18px;text-align:center;"></i>Composição corporal (gordura e massa magra)
+            </li>
+            <li style="display:flex;align-items:center;gap:12px;color:var(--gray-light);font-size:0.95rem;">
+              <i class="fa-solid fa-person-arrow-up-from-line" style="color:var(--accent);width:18px;text-align:center;"></i>Peso e altura
+            </li>
+            <li style="display:flex;align-items:center;gap:12px;color:var(--gray-light);font-size:0.95rem;">
+              <i class="fa-solid fa-file-waveform" style="color:var(--accent);width:18px;text-align:center;"></i>Relatório individualizado com seus dados
+            </li>
+          </ul>
+          <a href="https://wa.me/5541995882593?text=Olá!%20Quero%20agendar%20minha%20avaliação%20física%20por%20R$39,90." target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;">
+            <i class="fa-brands fa-whatsapp"></i>
+            Agendar pelo WhatsApp
+          </a>
+        </div>
+        <div class="reveal-right">
+          <div style="background:linear-gradient(145deg,var(--dark2),var(--blue-dark));border:1px solid rgba(107,127,255,0.25);border-radius:20px;padding:48px 40px;text-align:center;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(107,127,255,0.15) 0%,transparent 70%);border-radius:50%;"></div>
+            <i class="fa-solid fa-clipboard-list" style="font-size:2.5rem;color:var(--accent);margin-bottom:20px;display:block;filter:drop-shadow(0 0 12px rgba(107,127,255,0.5));"></i>
+            <p style="font-family:var(--font-title);font-size:0.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Por apenas</p>
+            <div style="display:flex;align-items:flex-start;justify-content:center;gap:4px;margin-bottom:6px;">
+              <span style="font-size:1.4rem;font-weight:700;color:var(--gray-light);margin-top:10px;">R$</span>
+              <span style="font-family:var(--font-title);font-weight:900;font-size:5rem;color:var(--white);line-height:1;">39</span>
+              <span style="font-size:1.8rem;font-weight:700;color:var(--white);align-self:flex-end;margin-bottom:8px;">,90</span>
+            </div>
+            <p style="color:var(--gray);font-size:0.88rem;margin-bottom:24px;">Pagamento único — sem contrato</p>
+            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;">
+              <p style="color:var(--gray-light);font-size:0.88rem;line-height:1.7;">
+                Agende pelo WhatsApp<br>
+                <strong style="color:var(--white);">(41) 99588-2593</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section id="reviews">
+    <div class="section-header center reveal">
+      <p class="section-label">O que dizem nossos alunos</p>
+      <h2 class="section-title">Avaliações <span>Google</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="rating-hero reveal">
+      <div class="rating-score">4,8</div>
+      <div class="rating-info">
+        <div class="rating-stars">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star-half-stroke"></i>
+        </div>
+        <p class="rating-count">Baseado em 149 avaliações</p>
+      </div>
+      <div class="rating-google">
+        <i class="fa-brands fa-google"></i>
+        <div>
+          <strong style="display:block;font-size:0.92rem;">Academia Invictus</strong>
+          <span style="font-size:0.8rem;color:var(--gray);">no Google Maps</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="review-avatar">CL</div>
+          <div>
+            <p class="review-name">Carlos Lima</p>
+            <p class="review-date">Há 2 semanas</p>
+          </div>
+        </div>
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="review-text">Excelente academia! Equipamentos novos, professores atenciosos e ambiente motivador. Treino aqui há 1 ano e os resultados são impressionantes. Recomendo muito!</p>
+      </div>
+      <div class="review-card reveal" style="transition-delay:0.1s">
+        <div class="review-top">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#c27bff,#7b5ea7)">AM</div>
+          <div>
+            <p class="review-name">Ana Martins</p>
+            <p class="review-date">Há 1 mês</p>
+          </div>
+        </div>
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p class="review-text">A melhor academia do Boqueirão sem dúvidas. Ambiente limpo, equipe super prestativa e preço justo. Fiz a aula experimental e já me matriculei no mesmo dia!</p>
+      </div>
+      <div class="review-card reveal" style="transition-delay:0.2s">
+        <div class="review-top">
+          <div class="review-avatar" style="background:linear-gradient(135deg,#4fc3f7,#1565c0)">RS</div>
+          <div>
+            <p class="review-name">Rafael Silva</p>
+            <p class="review-date">Há 3 semanas</p>
+          </div>
+        </div>
+        <div class="review-stars">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+        </div>
+        <p class="review-text">Ótima estrutura, aparelhos sempre funcionando e professores qualificados. O plano anual vale muito a pena. Ambiente super motivador para treinar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ESTRUTURA ── -->
+  <section id="estrutura">
+    <div class="section-header center reveal">
+      <p class="section-label">Conheça o espaço</p>
+      <h2 class="section-title">Nossa <span>Estrutura</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Espaço amplo e equipado com o que há de mais moderno para seu treino.</p>
+    </div>
+    <div class="structure-grid">
+      <div class="structure-item reveal-left">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80" alt="Sala de musculação" loading="lazy">
+        <div class="structure-item-label">Sala de Musculação</div>
+      </div>
+      <div class="structure-item reveal">
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="Área de cardio" loading="lazy">
+        <div class="structure-item-label">Área de Cardio</div>
+      </div>
+      <div class="structure-item reveal">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Área funcional" loading="lazy">
+        <div class="structure-item-label">Área Funcional</div>
+      </div>
+      <div class="structure-item reveal-left" style="transition-delay:0.1s">
+        <img src="vestiario.jpg" alt="Vestiário" loading="lazy">
+        <div class="structure-item-label">Vestiários</div>
+      </div>
+      <div class="structure-item reveal" style="transition-delay:0.1s">
+        <img src="https://images.unsplash.com/photo-1590487988256-9ed24133863e?w=600&q=80" alt="Alongamento" loading="lazy">
+        <div class="structure-item-label">Área de Alongamento</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HORÁRIOS + PAGAMENTOS ── -->
+  <section id="info">
+    <div class="info-grid">
+      <div class="reveal-left">
+        <p class="section-label">Funcionamento</p>
+        <h2 class="section-title">Horários de <span>Atendimento</span></h2>
+        <div class="divider"></div>
+        <table class="hours-table">
+          <tr>
+            <td><i class="fa-regular fa-calendar" style="color:var(--accent);margin-right:10px;"></i>Segunda a Sexta</td>
+            <td>06:30 — 22:30</td>
+          </tr>
+          <tr>
+            <td><i class="fa-regular fa-calendar" style="color:var(--accent);margin-right:10px;"></i>Sábado</td>
+            <td>09:00 — 14:00</td>
+          </tr>
+          <tr>
+            <td><i class="fa-regular fa-calendar" style="color:var(--accent);margin-right:10px;"></i>Feriados</td>
+            <td>09:00 — 14:00</td>
+          </tr>
+          <tr>
+            <td><i class="fa-regular fa-calendar" style="color:var(--accent);margin-right:10px;"></i>Domingo</td>
+            <td style="color:var(--gray);">Fechado</td>
+          </tr>
+        </table>
+
+        <p class="section-label" style="margin-top:36px;">Aulas coletivas</p>
+        <h3 style="font-family:var(--font-title);font-weight:800;font-size:1.15rem;margin-bottom:16px;color:var(--white);">Grade de <span style="color:var(--accent);">Horários</span></h3>
+        <div style="overflow-x:auto;">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Horário</th>
+                <th>Segunda</th>
+                <th>Quarta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>08:30 – 09:30</td>
+                <td><span class="schedule-tag funcional">Funcional</span></td>
+                <td><span class="schedule-tag funcional">Funcional</span></td>
+              </tr>
+              <tr>
+                <td>18:30 – 19:30</td>
+                <td><span class="schedule-tag fitdance">FitDance</span></td>
+                <td><span class="schedule-tag fitdance">FitDance</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <p class="section-label">Aceitos na academia</p>
+        <h2 class="section-title">Formas de <span>Pagamento</span></h2>
+        <div class="divider"></div>
+        <div class="payment-methods">
+          <div class="payment-item">
+            <div class="payment-icon"><i class="fa-solid fa-credit-card"></i></div>
+            <div>
+              <span>Cartão de Crédito e Débito</span>
+              <p style="color:var(--gray);font-size:0.8rem;margin-top:2px;">Todas as bandeiras aceitas</p>
+            </div>
+          </div>
+          <div class="payment-item">
+            <div class="payment-icon"><i class="fa-solid fa-qrcode"></i></div>
+            <div>
+              <span>Pix</span>
+              <p style="color:var(--gray);font-size:0.8rem;margin-top:2px;">Pagamento instantâneo</p>
+            </div>
+          </div>
+          <div class="payment-item">
+            <div class="payment-icon"><i class="fa-solid fa-id-card"></i></div>
+            <div>
+              <span>Gympass</span>
+              <p style="color:var(--gray);font-size:0.8rem;margin-top:2px;">Convênio benefício empresa</p>
+            </div>
+          </div>
+          <div class="payment-item">
+            <div class="payment-icon"><i class="fa-solid fa-id-badge"></i></div>
+            <div>
+              <span>Total Pass</span>
+              <p style="color:var(--gray);font-size:0.8rem;margin-top:2px;">Convênio benefício empresa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FORMULÁRIO ── -->
+  <section id="formulario">
+    <div class="form-wrapper">
+      <div class="form-info reveal-left">
+        <p class="section-label">Comece agora</p>
+        <h2 class="section-title">Faça sua <span>Matrícula</span></h2>
+        <div class="divider"></div>
+        <p>Preencha o formulário ao lado e nossa equipe entrará em contato pelo WhatsApp para finalizar seu cadastro ou agendar sua aula experimental.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/5541995882593" target="_blank" rel="noopener" class="contact-link">
+            <i class="fa-brands fa-whatsapp"></i>
+            (41) 99588-2593
+          </a>
+          <a href="https://instagram.com/academiainvictuss" target="_blank" rel="noopener" class="contact-link">
+            <i class="fa-brands fa-instagram"></i>
+            @academiainvictuss
+          </a>
+          <a href="https://maps.google.com/?q=R.+Pastor+Antônio+Polito,+2051,+Boqueirão,+Curitiba+PR" target="_blank" rel="noopener" class="contact-link">
+            <i class="fa-solid fa-location-dot"></i>
+            R. Pastor Antônio Polito, 2051 — Boqueirão, Curitiba/PR
+          </a>
+        </div>
+      </div>
+      <div class="form-card reveal-right">
+        <h3>Solicitar Contato</h3>
+        <p>Retornaremos via WhatsApp em instantes.</p>
+        <form id="leadForm" novalidate>
+          <div class="form-group">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp *</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(41) 99999-9999" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="plano">Plano de interesse *</label>
+              <div class="select-wrapper">
+                <select id="plano" name="plano" required>
+                  <option value="">Selecione...</option>
+                  <option value="Aula Experimental Grátis">Aula Experimental Grátis</option>
+                  <option value="Mensal - R$99,90">Mensal — R$99,90</option>
+                  <option value="Trimestral - R$84,90/mês">Trimestral — R$84,90/mês</option>
+                  <option value="Semestral - R$74,90/mês">Semestral — R$74,90/mês</option>
+                  <option value="Anual - R$64,90/mês">Anual — R$64,90/mês</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="horario">Melhor horário para visita *</label>
+              <div class="select-wrapper">
+                <select id="horario" name="horario" required>
+                  <option value="">Selecione...</option>
+                  <option value="Manhã (6:30–12:00)">Manhã (6:30–12:00)</option>
+                  <option value="Tarde (12:00–18:00)">Tarde (12:00–18:00)</option>
+                  <option value="Noite (18:00–22:30)">Noite (18:00–22:30)</option>
+                  <option value="Sábado (9:00–14:00)">Sábado (9:00–14:00)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">
+            <div class="spinner" id="spinner"></div>
+            <i class="fa-solid fa-paper-plane" id="btnIcon"></i>
+            <span id="btnText">Enviar Solicitação</span>
+          </button>
+          <div class="form-message" id="formMessage"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LOCALIZAÇÃO ── -->
+  <section id="localizacao">
+    <div class="section-header center reveal">
+      <p class="section-label">Onde estamos</p>
+      <h2 class="section-title">Nossa <span>Localização</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="location-grid">
+      <div class="location-info reveal-left">
+        <div class="location-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <strong>Endereço</strong>
+            <span>R. Pastor Antônio Polito, 2051<br>Boqueirão — Curitiba/PR<br>CEP: 81650-390</span>
+          </div>
+        </div>
+        <div class="location-item">
+          <i class="fa-solid fa-clock"></i>
+          <div>
+            <strong>Horários</strong>
+            <span>Seg–Sex: 6:30 às 22:30<br>Sáb e feriados: 9:00 às 14:00</span>
+          </div>
+        </div>
+        <div class="location-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <div>
+            <strong>Contato</strong>
+            <span>(41) 99588-2593</span>
+          </div>
+        </div>
+        <div class="location-item">
+          <i class="fa-brands fa-instagram"></i>
+          <div>
+            <strong>Instagram</strong>
+            <span>@academiainvictuss</span>
+          </div>
+        </div>
+        <a href="https://wa.me/5541995882593?text=Olá!%20Vi%20o%20site%20e%20quero%20saber%20mais%20sobre%20a%20Academia%20Invictus." target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;">
+          <i class="fa-brands fa-whatsapp"></i>
+          Como chegar no WhatsApp
+        </a>
+      </div>
+      <div class="map-container reveal-right">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d-49.2451!3d-25.5068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce4e02b3b5a5b%3A0x0!2sR.+Pastor+Ant%C3%B4nio+Polito%2C+2051+-+Boqueir%C3%A3o%2C+Curitiba+-+PR!5e0!3m2!1spt-BR!2sbr!4v1"
+          width="100%" height="380"
+          style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização Academia Invictus">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="24" height="30" viewBox="0 0 28 36" fill="none">
+            <path d="M18 1L4 20H14L10 35L26 14H16L18 1Z" fill="#6b7fff"/>
+          </svg>
+          <span class="footer-logo-text">INVICTUS</span>
+        </div>
+        <p>A academia que transforma rotinas em resultados. Estrutura completa, equipe qualificada e ambiente motivador no Boqueirão, Curitiba.</p>
+        <div class="social-links">
+          <a href="https://instagram.com/academiainvictuss" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/5541995882593" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#modalidades">Modalidades</a></li>
+          <li><a href="#planos">Planos e Preços</a></li>
+          <li><a href="#experimental">Aula Experimental</a></li>
+          <li><a href="#reviews">Avaliações</a></li>
+          <li><a href="#formulario">Matricule-se</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informações</h4>
+        <ul>
+          <li>R. Pastor Antônio Polito, 2051</li>
+          <li>Boqueirão — Curitiba/PR</li>
+          <li style="margin-top:8px;">(41) 99588-2593</li>
+          <li>@academiainvictuss</li>
+          <li style="margin-top:8px;">Seg–Sex: 6:30–22:30</li>
+          <li>Sáb/Fer: 9:00–14:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Academia Invictus. Todos os direitos reservados.</p>
+      <p>Boqueirão, Curitiba — PR</p>
+    </div>
+  </footer>
+
+  <!-- ── FLOATING WHATSAPP ── -->
+  <div class="whatsapp-float">
+    <div class="whatsapp-tooltip">Fale conosco no WhatsApp</div>
+    <a href="https://wa.me/5541995882593?text=Olá!%20Vi%20o%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20Academia%20Invictus." target="_blank" rel="noopener" class="whatsapp-btn" aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <script>
+    // ── NAV SCROLL ──
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // ── PARALLAX HERO ──
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `scale(1.05) translateY(${y * 0.25}px)`;
+      }
+    }, { passive: true });
+
+    // ── PARTICLES ──
+    (function() {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function createParticle() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.3,
+          alpha: Math.random() * 0.5 + 0.1,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          pulse: Math.random() * Math.PI * 2
+        };
+      }
+
+      for (let i = 0; i < 120; i++) particles.push(createParticle());
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const t = Date.now() / 1000;
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+          const a = p.alpha * (0.7 + 0.3 * Math.sin(t * 1.2 + p.pulse));
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(160,180,255,${a})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── SCROLL REVEAL ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ── SELECT PLAN FROM CARDS ──
+    function selectPlan(planValue) {
+      document.getElementById('plano').value = planValue;
+      document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ── FORM SUBMIT ──
+    const WEBHOOK_URL = '[WEBHOOK_URL]'; // Substitua pela URL real do webhook
+
+    document.getElementById('leadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const whatsappRaw = document.getElementById('whatsapp').value.trim();
+      const plano = document.getElementById('plano').value;
+      const horario = document.getElementById('horario').value;
+      const submitBtn = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      const btnIcon = document.getElementById('btnIcon');
+      const btnText = document.getElementById('btnText');
+      const msgEl = document.getElementById('formMessage');
+
+      // Validation
+      if (!nome || !whatsappRaw || !plano || !horario) {
+        showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
+        return;
+      }
+
+      // Format WhatsApp: extract digits, prepend 55 if needed
+      const digits = whatsappRaw.replace(/\D/g, '');
+      let whatsapp = digits;
+      if (digits.length === 11) whatsapp = '55' + digits;
+      else if (digits.length === 13 && digits.startsWith('55')) whatsapp = digits;
+      else if (digits.length < 10) {
+        showMessage('WhatsApp inválido. Informe DDD + número.', 'error');
+        return;
+      }
+
+      const tipo = plano === 'Aula Experimental Grátis' ? 'aula_experimental' : 'matricula';
+      const payload = { nome, whatsapp, plano, horario_visita: horario, tipo };
+
+      // Loading state
+      submitBtn.disabled = true;
+      spinner.style.display = 'block';
+      btnIcon.style.display = 'none';
+      btnText.textContent = 'Enviando...';
+      msgEl.style.display = 'none';
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          showMessage('Recebemos seu interesse! Você receberá uma mensagem no WhatsApp em instantes.', 'success');
+          document.getElementById('leadForm').reset();
+        } else {
+          throw new Error('Resposta não-ok: ' + res.status);
+        }
+      } catch (err) {
+        showMessage('Ocorreu um erro ao enviar. Por favor, entre em contato pelo WhatsApp: (41) 99588-2593', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
+        btnIcon.style.display = 'inline';
+        btnText.textContent = 'Enviar Solicitação';
+      }
+    });
+
+    function showMessage(text, type) {
+      const msgEl = document.getElementById('formMessage');
+      msgEl.textContent = text;
+      msgEl.className = 'form-message ' + type;
+      msgEl.style.display = 'block';
+      msgEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ── WHATSAPP MASK ──
+    document.getElementById('whatsapp').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+  </script>
+</body>
+</html>
